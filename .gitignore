@@ -1,0 +1,15 @@
+# Vault Agent credential files — never commit these
+.vault/
+
+# Environment secrets
+.env
+*.bak
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Generated output
+vault-adp.png
