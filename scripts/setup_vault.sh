@@ -90,24 +90,37 @@ vault write transform/transformation/tok-conta \
   type=tokenization convergent=true max_ttl=0 \
   allowed_roles="api-role,core-role,db-role,pipeline-role" && echo "  ✅ tok-conta"
 
+# Dados sensíveis LGPD Art. 11 — saúde, raça, religião
+vault write transform/transformation/tok-saude \
+  type=tokenization convergent=true max_ttl=0 \
+  allowed_roles="api-role,core-role,db-role,pipeline-role" && echo "  ✅ tok-saude"
+
+vault write transform/transformation/tok-raca \
+  type=tokenization convergent=true max_ttl=0 \
+  allowed_roles="api-role,core-role,db-role,pipeline-role" && echo "  ✅ tok-raca"
+
+vault write transform/transformation/tok-religiao \
+  type=tokenization convergent=true max_ttl=0 \
+  allowed_roles="api-role,core-role,db-role,pipeline-role" && echo "  ✅ tok-religiao"
+
 # ── Roles ─────────────────────────────────────────────────────────────────
 echo ""
 echo "👥 [4/5] Configurando Transform Roles..."
 
 vault write transform/role/api-role \
-  transformations=ff-cpf,ff-cnpj,ff-pan,ff-telefone,mask-email,mask-nome,mask-dob,mask-cvv,tok-endereco,tok-conta \
+  transformations=ff-cpf,ff-cnpj,ff-pan,ff-telefone,mask-email,mask-nome,mask-dob,mask-cvv,tok-endereco,tok-conta,tok-saude,tok-raca,tok-religiao \
   && echo "  ✅ api-role (encode-only)"
 
 vault write transform/role/core-role \
-  transformations=ff-cpf,ff-cnpj,ff-rg,ff-cnh,ff-pan,ff-telefone,mask-email,mask-nome,mask-dob,mask-cvv,tok-endereco,tok-conta \
+  transformations=ff-cpf,ff-cnpj,ff-rg,ff-cnh,ff-pan,ff-telefone,mask-email,mask-nome,mask-dob,mask-cvv,tok-endereco,tok-conta,tok-saude,tok-raca,tok-religiao \
   && echo "  ✅ core-role (encode + decode)"
 
 vault write transform/role/db-role \
-  transformations=ff-cpf,ff-cnpj,ff-rg,ff-cnh,ff-pan,ff-telefone,tok-endereco,tok-conta \
+  transformations=ff-cpf,ff-cnpj,ff-rg,ff-cnh,ff-pan,ff-telefone,tok-endereco,tok-conta,tok-saude,tok-raca,tok-religiao \
   && echo "  ✅ db-role"
 
 vault write transform/role/pipeline-role \
-  transformations=ff-cpf,ff-cnpj,ff-pan,ff-telefone,mask-email,mask-dob,tok-endereco,tok-conta \
+  transformations=ff-cpf,ff-cnpj,ff-pan,ff-telefone,mask-email,mask-dob,tok-endereco,tok-conta,tok-saude,tok-raca,tok-religiao \
   && echo "  ✅ pipeline-role"
 
 # ── AppRole ───────────────────────────────────────────────────────────────

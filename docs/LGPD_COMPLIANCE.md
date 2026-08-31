@@ -57,6 +57,21 @@ segurança e privacidade desde a concepção.
 
 ---
 
+### Art. 11 — Tratamento de Dados Pessoais Sensíveis
+**Obrigação:** Dados sobre saúde, origem racial ou étnica, convicção religiosa
+e outros dados sensíveis (Art. 5º, II) exigem hipóteses de tratamento e
+salvaguardas específicas, mais restritivas que dados pessoais comuns.
+
+**Atendimento:**
+- Saúde, raça e religião são sempre tokenizados (`tok-saude`, `tok-raca`,
+  `tok-religiao`) — nunca tratados como texto livre em claro
+- Tokenização convergente permite análises agregadas (ex.: contagem por
+  categoria) sem expor o valor sensível original
+- Mesmas políticas de RBAC de dados comuns se aplicam: detokenize restrito a
+  `core-role`, nunca a `api-role` ou `pipeline-role`
+
+---
+
 ### Art. 20 — Revisão de Decisões Automatizadas
 **Obrigação:** Direito do titular de solicitar revisão de decisões tomadas
 unicamente por meios automatizados.
@@ -81,6 +96,9 @@ unicamente por meios automatizados.
 | CVV              | Masking      | Art. 46, 48      | Dado sensível PCI — masking total          |
 | Endereço         | Tokenização  | Art. 46, 48      | Referência consistente sem revelar local   |
 | Conta Bancária   | Tokenização  | Art. 46, 48      | Token para correlação em sistemas          |
+| Saúde            | Tokenização  | Art. 11, 46, 48  | Dado sensível — nunca em claro em BD/log   |
+| Raça             | Tokenização  | Art. 11, 46, 48  | Dado sensível — nunca em claro em BD/log   |
+| Religião         | Tokenização  | Art. 11, 46, 48  | Dado sensível — nunca em claro em BD/log   |
 
 ---
 

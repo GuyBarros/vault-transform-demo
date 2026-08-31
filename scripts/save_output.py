@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-DEMO = Path(__file__).resolve().parent / "demo_all.py"
+DEMO = Path(__file__).resolve().parent / "demo_retrofit.py"
 OUT  = Path(__file__).resolve().parents[1] / "vault-adp.png"
 
 # ── ANSI colour tables ────────────────────────────────────────────────────────
